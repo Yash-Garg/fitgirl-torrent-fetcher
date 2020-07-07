@@ -1,5 +1,6 @@
 import requests
 import re
+import os
 from bs4 import BeautifulSoup
 
 base_url = "https://1337x.to"
@@ -42,7 +43,8 @@ if query != "":
         file.writelines(data)
         file.close()
         print("\nSuccessfully saved torrents to output.txt")
-
+        print("\nOpening file...")
+        os.startfile("output.txt")
 else:
     print("\nNo keyword specified. Re-run the script!")
     exit(0)
