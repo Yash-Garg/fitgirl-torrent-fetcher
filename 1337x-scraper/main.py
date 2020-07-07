@@ -20,7 +20,8 @@ if query != "":
         soup = BeautifulSoup(response.content, "lxml")
         urls = []
         data = []
-        table = soup.find("table", attrs={"class": "table-list table table-responsive table-striped"})
+        table = soup.find(
+            "table", attrs={"class": "table-list table table-responsive table-striped"})
         rows = table.find_all("tr")
         for row in rows:
             cols = row.find_all("td", attrs={"class": "coll-1 name"})
@@ -33,7 +34,8 @@ if query != "":
             if resp.status_code == 200:
                 soup = BeautifulSoup(resp.content, "lxml")
                 title = soup.select("h1")[0].text.strip()
-                magnet = soup.find("a", href = re.compile(r'[magnet]([a-z]|[A-Z])\w+'), class_=True).attrs["href"]
+                magnet = soup.find("a", href=re.compile(
+                    r'[magnet]([a-z]|[A-Z])\w+'), class_=True).attrs["href"]
                 data.append("\n" + title + " - " + magnet + "\n")
         file = open("output.txt", "w", encoding="utf=-8")
         file.writelines(data)
