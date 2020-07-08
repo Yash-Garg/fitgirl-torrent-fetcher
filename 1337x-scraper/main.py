@@ -38,7 +38,7 @@ if query != "":
                 magnet = soup.find("a", href=re.compile(
                     r'[magnet]([a-z]|[A-Z])\w+'), class_=True).attrs["href"]
                 for title in titles:
-                    data.append("\n" + title + " - " + magnet + "\n")
+                    data.append("\n\"{}\" - {}\n".format(title, magnet))
         file = open("output.txt", "w", encoding="utf=-8")
         file.writelines(data)
         file.close()
