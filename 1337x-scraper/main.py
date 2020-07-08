@@ -37,12 +37,14 @@ if query != "":
             resp = requests.post(url, headers=headers)
             if resp.status_code == 200:
                 soup = BeautifulSoup(resp.content, "lxml")
-                size = soup.find("span", text=re.compile(r'([0-9].[0-9]) ([A-Z])'), class_=None)
+                size = soup.find("span", text=re.compile(
+                    r'([0-9].[0-9]) ([A-Z])'), class_=None).contents[0]
                 magnet = soup.find("a", href=re.compile(
                     r'[magnet]([a-z]|[A-Z])\w+'), class_=True).attrs["href"]
                 for title in titles:
                     for seed in seeders:
-                        data.append("\nTitle: {}\nSeeders: {}\nSize: {}\nMagnet Link: {}\n".format(title, seed, size.contents[0], magnet))
+                        data.append("\nTitle: {}\nSeeders: {}\nSize: {}\nMagnet Link: {}\n".format(
+                            title, seed, size, magnet))
         file = open("output.txt", "w", encoding="utf=-8")
         file.writelines(data)
         file.close()
