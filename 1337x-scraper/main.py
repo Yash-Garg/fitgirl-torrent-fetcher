@@ -26,8 +26,7 @@ if query != "":
         rows = table.find_all("tr")
         for row in rows:
             cols = row.find_all("td", attrs={"class": "coll-1 name"})
-            for seeds in row.find_all("td", attrs={"class": "coll-2 seeds"}):
-                seeders.append(seeds.contents[0])
+            seeds = row.find_all("td", attrs={"class": "coll-2 seeds"})
             for col in cols:
                 torrents = col.find_all("a", href=True, class_=None)
                 headings = col.find("a", href=True, class_=None).contents[0]
@@ -38,11 +37,12 @@ if query != "":
             resp = requests.post(url, headers=headers)
             if resp.status_code == 200:
                 soup = BeautifulSoup(resp.content, "lxml")
+                size = soup.find("span", text=re.compile(r'([0-9].[0-9]) ([A-Z])'), class_=None)
                 magnet = soup.find("a", href=re.compile(
                     r'[magnet]([a-z]|[A-Z])\w+'), class_=True).attrs["href"]
                 for title in titles:
                     for seed in seeders:
-                        data.append("\nTitle: {}\nSeeders: {}\nMagnet Link: {}\n".format(title, seed, magnet))
+                        data.append("\nTitle: {}\nSeeders: {}\nSize: {}\nMagnet Link: {}\n".format(title, seed, size.contents[0], magnet))
         file = open("output.txt", "w", encoding="utf=-8")
         file.writelines(data)
         file.close()
