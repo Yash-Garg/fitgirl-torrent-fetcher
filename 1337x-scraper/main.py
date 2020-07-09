@@ -46,13 +46,12 @@ if query != "":
         file.writelines(data)
         file.close()
         print("\nSuccessfully saved torrents to output.txt")
-        ch = input("\nWant to open output file? (Y/N): ")
+        ch = input("\nDo you want to open the output file? (Y/N): ")
         if (ch == "Y" or ch == "y"):
             print("\nOpening file! Please wait....")
             os.startfile("output.txt")
         else:
             exit(0)
-
 else:
     print("\nNo keyword specified. Re-run the script!")
     exit(0)
