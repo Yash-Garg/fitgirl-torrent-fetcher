@@ -42,7 +42,7 @@ if query != "":
                     r'[magnet]([a-z]|[A-Z])\w+'), class_=True).attrs["href"]
                 data.append("\nTitle: {}\nSeeders: {}\nSize: {}\nMagnet Link: {}\n".format(
                     title.contents[0], seeds.contents[0], size.contents[0], magnet))
-        file = open("output.txt", "w", encoding="utf=-8")
+        file = open("output.txt", "w", encoding="utf-8")
         file.writelines(data)
         file.close()
         print("\nSuccessfully saved torrents to output.txt")
