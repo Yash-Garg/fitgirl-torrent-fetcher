@@ -1,6 +1,7 @@
 import requests
 import re
 import os
+import sys
 import json
 import string
 from bs4 import BeautifulSoup
@@ -10,9 +11,14 @@ base_url = "https://1337x.to"
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36"
 )
+
 headers = {"user-agent": USER_AGENT}
 
-query = input("\nEnter keyword to search: ")
+if len(sys.argv) > 1:
+    query = " ".join(sys.argv[1:])
+    print("\nEntered query: {}".format(query))
+else:
+    query = input("\nEnter query to search: ")
 
 if query != "":
     search_url = base_url + "/search/" + query + "/1/"
