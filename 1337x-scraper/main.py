@@ -1,6 +1,8 @@
 import requests
 import re
 import os
+import json
+import string
 from bs4 import BeautifulSoup
 
 base_url = "https://1337x.to"
@@ -40,18 +42,19 @@ if query != "":
                     r'([0-9].[0-9]) ([A-Z])'), class_=None)
                 magnet = soup.find("a", href=re.compile(
                     r'[magnet]([a-z]|[A-Z])\w+'), class_=True).attrs["href"]
-                data.append("\nTitle: {}\nSeeders: {}\nSize: {}\nMagnet Link: {}\n".format(
-                    title.contents[0], seeds.contents[0], size.contents[0], magnet))
-        file = open("output.txt", "w", encoding="utf-8")
-        file.writelines(data)
+                data.append({"Title": title.contents[0].strip(
+                ), "Seeders": seeds.contents[0], "Size": size.contents[0], "Magnet": magnet})
+        file = open("output.json", "w", encoding="utf-8")
+        json.dump(data, file, indent=4)
         file.close()
-        print("\nSuccessfully saved torrents to output.txt")
-        ch = input("\nDo you want to open the output file? (Y/N): ")
+        print("\nSuccessfully saved torrents to output.json")
+        ch = input("\nWant to open output file? (Y/N): ")
         if (ch == "Y" or ch == "y"):
             print("\nOpening file! Please wait....")
-            os.startfile("output.txt")
+            os.startfile("output.json")
         else:
             exit(0)
+
 else:
     print("\nNo keyword specified. Re-run the script!")
     exit(0)
