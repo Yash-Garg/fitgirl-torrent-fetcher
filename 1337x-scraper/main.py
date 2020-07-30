@@ -42,7 +42,7 @@ if query != "":
                     r'([0-9].[0-9]) ([A-Z])'), class_=None)
                 magnet = soup.find("a", href=re.compile(
                     r'[magnet]([a-z]|[A-Z])\w+'), class_=True).attrs["href"]
-                data.append({"Title": title.contents[0].strip(
+                data.append({"Title": title.contents[0].encode('ascii', 'ignore').decode('ascii').strip(
                 ), "Seeders": seeds.contents[0], "Size": size.contents[0], "Magnet": magnet})
         file = open("output.json", "w", encoding="utf-8")
         json.dump(data, file, indent=4)
