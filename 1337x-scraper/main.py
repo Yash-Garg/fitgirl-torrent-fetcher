@@ -48,12 +48,6 @@ if query != "":
         json.dump(data, file, indent=4)
         file.close()
         print("\nSuccessfully saved torrents to output.json")
-        ch = input("\nWant to open output file? (Y/N): ")
-        if (ch == "Y" or ch == "y"):
-            print("\nOpening file! Please wait....")
-            os.startfile("output.json")
-        else:
-            exit(0)
 
 else:
     print("\nNo keyword specified. Re-run the script!")
