@@ -16,9 +16,9 @@ headers = {"user-agent": USER_AGENT}
 
 if len(sys.argv) > 1:
     query = " ".join(sys.argv[1:])
-    print("\nEntered query: {}".format(query))
+    print("Entered query : {}".format(query))
 else:
-    query = input("\nEnter query to search: ")
+    query = input("Enter query to search: ")
 
 if query != "":
     search_url = base_url + "/search/" + query + "/1/"
@@ -53,7 +53,7 @@ if query != "":
         file = open("output.json", "w", encoding="utf-8")
         json.dump(data, file, indent=4)
         file.close()
-        print("\nSuccessfully saved torrents to output.json")
+        print("Successfully saved torrents to output.json")
 
 else:
     print("\nNo keyword specified. Re-run the script!")
