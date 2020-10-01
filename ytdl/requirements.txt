@@ -1,0 +1,4 @@
+lxml
+requests_html
+beautifulsoup4
+pytube3
